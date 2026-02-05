@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>डमी मतदान यंत्र - Creator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;500;600;700&family=Khand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="creator.css">
+</head>
+<body>
+    <div class="creator-container">
+        <header class="creator-header">
+            <h1>🗳️ डमी मतदान यंत्र</h1>
+            <p>Demo Voting Machine Creator</p>
+        </header>
+
+        <form id="votingForm" class="creator-form">
+            <!-- Constituency Section -->
+            <section class="form-section">
+                <h2>📍 मतदारसंघ माहिती (Constituency Info)</h2>
+                
+                <div class="form-group">
+                    <label for="constituencyName">मतदारसंघाचे नाव *</label>
+                    <input type="text" id="constituencyName" placeholder="उदा. ५७ बोरामणी जिल्हा परिषद गट" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="votingDate">मतदान दिनांक *</label>
+                        <input type="date" id="votingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime">सुरुवात वेळ</label>
+                        <input type="time" id="startTime" value="07:30">
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime">शेवट वेळ</label>
+                        <input type="time" id="endTime" value="17:30">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Candidate Section -->
+            <section class="form-section">
+                <h2>👤 उमेदवार माहिती (Your Candidate)</h2>
+                
+                <div class="form-group">
+                    <label for="candidateName">उमेदवाराचे नाव *</label>
+                    <input type="text" id="candidateName" placeholder="उदा. अनिता योगेश माळगे" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalCandidates">एकूण उमेदवार संख्या *</label>
+                        <input type="number" id="totalCandidates" min="1" max="30" value="19" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidatePosition">आपला क्रमांक (Position) *</label>
+                        <input type="number" id="candidatePosition" min="1" max="30" value="6" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="symbolName">निवडणूक चिन्हाचे नाव *</label>
+                    <input type="text" id="symbolName" placeholder="उदा. रिक्षा" required>
+                </div>
+
+                <div class="form-row image-uploads">
+                    <div class="form-group">
+                        <label>उमेदवाराचा फोटो *</label>
+                        <div class="image-upload-box" id="photoUploadBox">
+                            <input type="file" id="candidatePhoto" accept="image/*" hidden>
+                            <div class="upload-placeholder" id="photoPlaceholder">
+                                <span class="upload-icon">📷</span>
+                                <span>फोटो अपलोड करा</span>
+                            </div>
+                            <img id="photoPreview" class="image-preview" alt="Photo Preview">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>निवडणूक चिन्ह *</label>
+                        <div class="image-upload-box" id="symbolUploadBox">
+                            <input type="file" id="candidateSymbol" accept="image/*" hidden>
+                            <div class="upload-placeholder" id="symbolPlaceholder">
+                                <span class="upload-icon">🏷️</span>
+                                <span>चिन्ह अपलोड करा</span>
+                            </div>
+                            <img id="symbolPreview" class="image-preview" alt="Symbol Preview">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="form-section">
+                <h2>📞 संपर्क माहिती (Contact)</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="websiteName">वेबसाइट नाव</label>
+                        <input type="text" id="websiteName" placeholder="उदा. votingdemo.in" value="votingdemo.in">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactNumber">संपर्क क्रमांक</label>
+                        <input type="tel" id="contactNumber" placeholder="उदा. +919359781891">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                <button type="button" class="btn btn-preview" id="previewBtn">
+                    👁️ Preview
+                </button>
+                <button type="submit" class="btn btn-generate">
+                    🚀 Generate Voting Page
+                </button>
+            </div>
+        </form>
+
+        <!-- Preview Modal -->
+        <div id="previewModal" class="modal">
+            <div class="modal-content preview-modal-content">
+                <div class="modal-header">
+                    <h3>Preview</h3>
+                    <button class="modal-close" id="closePreview">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="previewFrame" src=""></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content success-modal-content">
+                <div class="modal-header success-header">
+                    <h3>✅ Voting Page Generated!</h3>
+                    <button class="modal-close" id="closeSuccess">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Your demo voting page has been generated successfully!</p>
+                    <div class="success-actions">
+                        <a href="index.html" target="_blank" class="btn btn-open">
+                            🔗 Open Voting Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="creator.js"></script>
+</body>
+</html>
